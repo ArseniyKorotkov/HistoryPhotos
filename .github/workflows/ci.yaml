@@ -23,5 +23,11 @@ jobs:
       - name: setup gradle cache
         uses: gradle/actions/setup-gradle@v4
 
+      - name: grant gradlew execution rights
+        run: chmod +x ./gradlew
+
       - name: start tests
-        run: chmod +x ./gradlew && ./gradlew testDebugUnitTest
+        run: ./gradlew testDebugUnitTest
+
+      - name: build project
+        run: ./gradlew assembleDebug
