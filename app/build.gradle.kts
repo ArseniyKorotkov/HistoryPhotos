@@ -1,6 +1,21 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.ktlint)
+}
+
+detekt {
+    config.setFrom(files("$rootDir/config/detekt/detekt.yaml"))
+    buildUponDefaultConfig = true
+    ignoreFailures = false
+}
+
+ktlint {
+    filter {
+        exclude("**/generated/**")
+        include("**/kotlin/**")
+    }
 }
 
 android {

@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ "development" ]
+
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: install project
+        uses: actions/checkout@v4
+
+      - name: setup java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: setup gradle cache
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: grant gradlew execution rights
+        run: chmod +x ./gradlew
+
+      - name: run KtLint check
+        run: ./gradlew ktlintCheck
+
+      - name: run Detekt check
+        run: ./gradlew detekt
+
+      - name: start tests
+        run: ./gradlew testDebugUnitTest
+
+      - name: build project
+        run: ./gradlew assembleDebug
