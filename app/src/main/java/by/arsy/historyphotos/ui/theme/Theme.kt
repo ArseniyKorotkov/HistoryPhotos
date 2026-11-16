@@ -62,6 +62,7 @@ fun HistoryPhotosTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
+        shapes = AppShapes,
         content = content,
     )
 }
