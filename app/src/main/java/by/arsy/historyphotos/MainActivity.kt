@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -13,13 +14,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import by.arsy.historyphotos.ui.theme.HistoryPhotosTheme
 
 class MainActivity : ComponentActivity() {
@@ -27,17 +29,26 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            // TODO: временная переменная для демонстрации анимации переключения
-            var selectedType by rememberSaveable { mutableStateOf(NavType.MAP) }
+            val navController = rememberNavController()
+            val currentRoute = navController.currentBackStackEntryAsState()
 
             HistoryPhotosTheme {
                 Scaffold(
                     bottomBar = {
                         BottomNavBar(
-                            onClickMap = { selectedType = NavType.MAP },
-                            onClickPlaces = { selectedType = NavType.PLACES },
-                            onClickHistory = { selectedType = NavType.HISTORY },
-                            selectedType = selectedType,
+                            onClickMap = {
+                                navController.navigate(route = NavType.MAP.name)
+                            },
+                            onClickPlaces = {
+                                navController.navigate(route = NavType.PLACES.name)
+                            },
+                            onClickHistory = {
+                                navController.navigate(route = NavType.HISTORY.name)
+                            },
+                            selectedType =
+                                NavType.valueOf(
+                                    currentRoute.value?.destination?.route ?: NavType.MAP.name,
+                                ),
                             modifier =
                                 Modifier
                                     .fillMaxWidth()
@@ -48,10 +59,39 @@ class MainActivity : ComponentActivity() {
                     },
                     modifier = Modifier.fillMaxSize(),
                 ) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding),
-                    )
+                    val mainScreenModifier =
+                        Modifier
+                            .padding(paddingValues = innerPadding)
+                            .fillMaxSize()
+                    NavHost(
+                        navController = navController,
+                        startDestination = NavType.MAP.name,
+                    ) {
+                        composable(
+                            route = NavType.MAP.name,
+                        ) {
+                            StubScreen(
+                                name = NavType.MAP.name,
+                                modifier = mainScreenModifier,
+                            )
+                        }
+                        composable(
+                            route = NavType.PLACES.name,
+                        ) {
+                            StubScreen(
+                                name = NavType.PLACES.name,
+                                modifier = mainScreenModifier,
+                            )
+                        }
+                        composable(
+                            route = NavType.HISTORY.name,
+                        ) {
+                            StubScreen(
+                                name = NavType.HISTORY.name,
+                                modifier = mainScreenModifier,
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -59,20 +99,22 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(
+fun StubScreen(
     name: String,
     modifier: Modifier = Modifier,
 ) {
-    Text(
-        text = "Hello $name!",
+    Box(
+        contentAlignment = Alignment.Center,
         modifier = modifier,
-    )
+    ) {
+        Text(text = "Screen $name")
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun StubScreenPreview() {
     HistoryPhotosTheme {
-        Greeting("Android")
+        StubScreen("Android")
     }
 }
