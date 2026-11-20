@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
                                 Modifier
                                     .fillMaxWidth()
                                     .background(color = MaterialTheme.colorScheme.surfaceContainer)
-                                    .padding(bottom = 12.dp, top = 12.dp) // TODO: взято наугад
+                                    .padding(bottom = 16.dp, top = 12.dp)
                                     .navigationBarsPadding(),
                         )
                     },

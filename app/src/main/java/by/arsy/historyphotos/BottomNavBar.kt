@@ -80,7 +80,7 @@ private fun ButtonBarItem(
             contentAlignment = Alignment.Center,
             modifier =
                 Modifier
-                    .padding(bottom = 6.dp) // TODO: взято наугад
+                    .padding(bottom = 4.dp)
                     .size(width = 64.dp, height = 32.dp), // TODO: хардкод размеров картинки
         ) {
             // TODO: хочется сделать анимацию "перелета"
