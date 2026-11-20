@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -38,18 +39,22 @@ class MainActivity : ComponentActivity() {
                     bottomBar = {
                         BottomNavBar(
                             onClickMap = {
-                                navController.navigate(route = NavType.MAP.name)
+                                navController.navigate(route = NavType.Map)
                             },
                             onClickPlaces = {
-                                navController.navigate(route = NavType.PLACES.name)
+                                navController.navigate(route = NavType.Places)
                             },
                             onClickHistory = {
-                                navController.navigate(route = NavType.HISTORY.name)
+                                navController.navigate(route = NavType.History)
                             },
                             selectedType =
-                                NavType.valueOf(
-                                    currentRoute.value?.destination?.route ?: NavType.MAP.name,
-                                ),
+                                currentRoute.value?.destination?.let {
+                                    when {
+                                        it.hasRoute<NavType.Places>() -> NavType.Places
+                                        it.hasRoute<NavType.History>() -> NavType.History
+                                        else -> NavType.Map
+                                    }
+                                } ?: NavType.Map,
                             modifier =
                                 Modifier
                                     .fillMaxWidth()
@@ -79,29 +84,23 @@ class MainActivity : ComponentActivity() {
     ) {
         NavHost(
             navController = navController,
-            startDestination = NavType.MAP.name,
+            startDestination = NavType.Map,
         ) {
-            composable(
-                route = NavType.MAP.name,
-            ) {
+            composable<NavType.Map> {
                 StubScreen(
-                    name = NavType.MAP.name,
+                    name = NavType.Map.toString(),
                     modifier = modifier,
                 )
             }
-            composable(
-                route = NavType.PLACES.name,
-            ) {
+            composable<NavType.Places> {
                 StubScreen(
-                    name = NavType.PLACES.name,
+                    name = NavType.Places.toString(),
                     modifier = modifier,
                 )
             }
-            composable(
-                route = NavType.HISTORY.name,
-            ) {
+            composable<NavType.History> {
                 StubScreen(
-                    name = NavType.HISTORY.name,
+                    name = NavType.History.toString(),
                     modifier = modifier,
                 )
             }

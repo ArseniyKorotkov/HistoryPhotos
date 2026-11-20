@@ -26,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import by.arsy.historyphotos.ui.theme.HistoryPhotosTheme
+import kotlinx.serialization.Serializable
 
 @Composable
 fun BottomNavBar(
@@ -42,19 +43,19 @@ fun BottomNavBar(
         ButtonBarItem(
             imageResId = R.drawable.ic_nav_map,
             nameResId = R.string.nav_map,
-            selected = selectedType == NavType.MAP,
+            selected = selectedType == NavType.Map,
             onClick = onClickMap,
         )
         ButtonBarItem(
             imageResId = R.drawable.ic_nav_places,
             nameResId = R.string.nav_places,
-            selected = selectedType == NavType.PLACES,
+            selected = selectedType == NavType.Places,
             onClick = onClickPlaces,
         )
         ButtonBarItem(
             imageResId = R.drawable.ic_nav_history,
             nameResId = R.string.nav_history,
-            selected = selectedType == NavType.HISTORY,
+            selected = selectedType == NavType.History,
             onClick = onClickHistory,
         )
     }
@@ -125,11 +126,17 @@ private fun ButtonBarItem(
     }
 }
 
-// TODO: не понятно где хранить этот ENUM
-enum class NavType {
-    MAP,
-    PLACES,
-    HISTORY,
+// TODO: не понятно где хранить этот тип
+@Serializable
+sealed interface NavType {
+    @Serializable
+    data object Map : NavType
+
+    @Serializable
+    data object Places : NavType
+
+    @Serializable
+    data object History : NavType
 }
 
 @Preview
@@ -140,7 +147,7 @@ private fun BottomNavBarPreview() {
             onClickMap = {},
             onClickPlaces = {},
             onClickHistory = {},
-            selectedType = NavType.PLACES,
+            selectedType = NavType.Places,
         )
     }
 }
