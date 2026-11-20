@@ -2,6 +2,7 @@ package by.arsy.historyphotos
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
@@ -67,6 +68,13 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
                     CenterHost(
                         navController = navController,
+                        onBackHandler = {
+                            if (currentRoute.value?.destination?.hasRoute<NavType.Map>() == true) {
+                                this.finishAffinity()
+                            } else {
+                                navController.navigate(route = NavType.Map)
+                            }
+                        },
                         modifier =
                             Modifier
                                 .padding(paddingValues = innerPadding)
@@ -80,6 +88,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun CenterHost(
         navController: NavHostController,
+        onBackHandler: () -> Unit,
         modifier: Modifier = Modifier,
     ) {
         NavHost(
@@ -87,18 +96,24 @@ class MainActivity : ComponentActivity() {
             startDestination = NavType.Map,
         ) {
             composable<NavType.Map> {
+                BackHandler { onBackHandler() }
+
                 StubScreen(
                     name = NavType.Map.toString(),
                     modifier = modifier,
                 )
             }
             composable<NavType.Places> {
+                BackHandler { onBackHandler() }
+
                 StubScreen(
                     name = NavType.Places.toString(),
                     modifier = modifier,
                 )
             }
             composable<NavType.History> {
+                BackHandler { onBackHandler() }
+
                 StubScreen(
                     name = NavType.History.toString(),
                     modifier = modifier,
