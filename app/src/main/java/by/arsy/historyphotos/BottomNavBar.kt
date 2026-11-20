@@ -98,14 +98,29 @@ private fun ButtonBarItem(
             Icon(
                 painter = painterResource(imageResId),
                 contentDescription = name,
-                tint = if (selected) MaterialTheme.colorScheme.onSecondaryContainer else MaterialTheme.colorScheme.onSurfaceVariant,
+                tint =
+                    if (selected) {
+                        MaterialTheme.colorScheme.onSecondaryContainer
+                    } else {
+                        MaterialTheme.colorScheme.onSurfaceVariant
+                    },
             )
         }
         Text(
             text = name,
             // TODO: не нашел применения weight из Figma 500 и 600
-            style = if (selected) MaterialTheme.typography.labelLarge else MaterialTheme.typography.labelMedium,
-            color = if (selected) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant,
+            style =
+                if (selected) {
+                    MaterialTheme.typography.labelLarge
+                } else {
+                    MaterialTheme.typography.labelMedium
+                },
+            color =
+                if (selected) {
+                    MaterialTheme.colorScheme.onSurface
+                } else {
+                    MaterialTheme.colorScheme.onSurfaceVariant
+                },
         )
     }
 }

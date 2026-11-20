@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -59,40 +60,50 @@ class MainActivity : ComponentActivity() {
                     },
                     modifier = Modifier.fillMaxSize(),
                 ) { innerPadding ->
-                    val mainScreenModifier =
-                        Modifier
-                            .padding(paddingValues = innerPadding)
-                            .fillMaxSize()
-                    NavHost(
+                    CenterHost(
                         navController = navController,
-                        startDestination = NavType.MAP.name,
-                    ) {
-                        composable(
-                            route = NavType.MAP.name,
-                        ) {
-                            StubScreen(
-                                name = NavType.MAP.name,
-                                modifier = mainScreenModifier,
-                            )
-                        }
-                        composable(
-                            route = NavType.PLACES.name,
-                        ) {
-                            StubScreen(
-                                name = NavType.PLACES.name,
-                                modifier = mainScreenModifier,
-                            )
-                        }
-                        composable(
-                            route = NavType.HISTORY.name,
-                        ) {
-                            StubScreen(
-                                name = NavType.HISTORY.name,
-                                modifier = mainScreenModifier,
-                            )
-                        }
-                    }
+                        modifier =
+                            Modifier
+                                .padding(paddingValues = innerPadding)
+                                .fillMaxSize(),
+                    )
                 }
+            }
+        }
+    }
+
+    @Composable
+    private fun CenterHost(
+        navController: NavHostController,
+        modifier: Modifier = Modifier,
+    ) {
+        NavHost(
+            navController = navController,
+            startDestination = NavType.MAP.name,
+        ) {
+            composable(
+                route = NavType.MAP.name,
+            ) {
+                StubScreen(
+                    name = NavType.MAP.name,
+                    modifier = modifier,
+                )
+            }
+            composable(
+                route = NavType.PLACES.name,
+            ) {
+                StubScreen(
+                    name = NavType.PLACES.name,
+                    modifier = modifier,
+                )
+            }
+            composable(
+                route = NavType.HISTORY.name,
+            ) {
+                StubScreen(
+                    name = NavType.HISTORY.name,
+                    modifier = modifier,
+                )
             }
         }
     }
