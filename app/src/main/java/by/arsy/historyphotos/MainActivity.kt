@@ -68,13 +68,7 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
                     CenterHost(
                         navController = navController,
-                        onBackHandler = {
-                            if (currentRoute.value?.destination?.hasRoute<NavType.Map>() == true) {
-                                this.finishAffinity()
-                            } else {
-                                navController.navigate(route = NavType.Map)
-                            }
-                        },
+                        closeApp = { this.finishAffinity() },
                         modifier =
                             Modifier
                                 .padding(paddingValues = innerPadding)
@@ -88,7 +82,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun CenterHost(
         navController: NavHostController,
-        onBackHandler: () -> Unit,
+        closeApp: () -> Unit,
         modifier: Modifier = Modifier,
     ) {
         NavHost(
@@ -96,7 +90,7 @@ class MainActivity : ComponentActivity() {
             startDestination = NavType.Map,
         ) {
             composable<NavType.Map> {
-                BackHandler { onBackHandler() }
+                BackHandler { closeApp() }
 
                 StubScreen(
                     name = NavType.Map.toString(),
@@ -104,7 +98,7 @@ class MainActivity : ComponentActivity() {
                 )
             }
             composable<NavType.Places> {
-                BackHandler { onBackHandler() }
+                BackHandler { navController.navigate(route = NavType.Map) }
 
                 StubScreen(
                     name = NavType.Places.toString(),
@@ -112,7 +106,7 @@ class MainActivity : ComponentActivity() {
                 )
             }
             composable<NavType.History> {
-                BackHandler { onBackHandler() }
+                BackHandler { navController.navigate(route = NavType.Map) }
 
                 StubScreen(
                     name = NavType.History.toString(),
