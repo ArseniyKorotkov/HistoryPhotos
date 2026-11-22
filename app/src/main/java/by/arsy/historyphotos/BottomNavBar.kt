@@ -25,8 +25,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import by.arsy.historyphotos.presentation.navigation.NavType
 import by.arsy.historyphotos.ui.theme.HistoryPhotosTheme
-import kotlinx.serialization.Serializable
 
 @Composable
 fun BottomNavBar(
@@ -124,19 +124,6 @@ private fun ButtonBarItem(
                 },
         )
     }
-}
-
-// TODO: не понятно где хранить этот тип
-@Serializable
-sealed interface NavType {
-    @Serializable
-    data object Map : NavType
-
-    @Serializable
-    data object Places : NavType
-
-    @Serializable
-    data object History : NavType
 }
 
 @Preview
