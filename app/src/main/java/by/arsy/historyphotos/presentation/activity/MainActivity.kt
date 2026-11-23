@@ -1,4 +1,4 @@
-package by.arsy.historyphotos
+package by.arsy.historyphotos.presentation.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -16,9 +16,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import by.arsy.historyphotos.presentation.navigation.BottomNavBar
 import by.arsy.historyphotos.presentation.navigation.NavType
+import by.arsy.historyphotos.presentation.theme.HistoryPhotosTheme
 import by.arsy.historyphotos.presentation.ui.CenterHost
-import by.arsy.historyphotos.ui.theme.HistoryPhotosTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,4 +1,4 @@
-package by.arsy.historyphotos
+package by.arsy.historyphotos.presentation.navigation
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -25,8 +25,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import by.arsy.historyphotos.presentation.navigation.NavType
-import by.arsy.historyphotos.ui.theme.HistoryPhotosTheme
+import by.arsy.historyphotos.R
+import by.arsy.historyphotos.presentation.theme.HistoryPhotosTheme
 
 @Composable
 fun BottomNavBar(
@@ -82,9 +82,10 @@ private fun ButtonBarItem(
             modifier =
                 Modifier
                     .padding(bottom = 4.dp)
-                    .size(width = 64.dp, height = 32.dp), // TODO: хардкод размеров картинки
+                    .size(width = 64.dp, height = 32.dp),
         ) {
-            // TODO: хочется сделать анимацию "перелета"
+            // TODO: возможно в будущем сделать
+            //  анимацию "перелета" изображения выделенного элемента навигации
             this@Column.AnimatedVisibility(
                 visible = selected,
                 enter = fadeIn() + scaleIn(),
@@ -109,7 +110,6 @@ private fun ButtonBarItem(
         }
         Text(
             text = name,
-            // TODO: не нашел применения weight из Figma 500 и 600
             style =
                 if (selected) {
                     MaterialTheme.typography.labelLarge
