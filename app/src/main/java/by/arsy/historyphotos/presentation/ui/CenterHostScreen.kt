@@ -9,7 +9,6 @@ import by.arsy.historyphotos.presentation.navigation.NavType
 @Composable
 fun CenterHost(
     navController: NavHostController,
-    closeApp: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     NavHost(
@@ -17,15 +16,12 @@ fun CenterHost(
         startDestination = NavType.Map,
     ) {
         mapScreen(
-            backNavigate = closeApp,
             modifier = modifier,
         )
         placesScreen(
-            backNavigate = { navController.navigate(route = NavType.Map) },
             modifier = modifier,
         )
         historyScreen(
-            backNavigate = { navController.navigate(route = NavType.Map) },
             modifier = modifier,
         )
     }

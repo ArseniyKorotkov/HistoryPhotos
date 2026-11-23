@@ -18,6 +18,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import by.arsy.historyphotos.presentation.navigation.BottomNavBar
 import by.arsy.historyphotos.presentation.navigation.NavType
+import by.arsy.historyphotos.presentation.navigation.bottomNavigate
 import by.arsy.historyphotos.presentation.theme.HistoryPhotosTheme
 import by.arsy.historyphotos.presentation.ui.CenterHost
 
@@ -34,13 +35,13 @@ class MainActivity : ComponentActivity() {
                     bottomBar = {
                         BottomNavBar(
                             onClickMap = {
-                                navController.navigate(route = NavType.Map)
+                                navController.bottomNavigate(route = NavType.Map)
                             },
                             onClickPlaces = {
-                                navController.navigate(route = NavType.Places)
+                                navController.bottomNavigate(route = NavType.Places)
                             },
                             onClickHistory = {
-                                navController.navigate(route = NavType.History)
+                                navController.bottomNavigate(route = NavType.History)
                             },
                             selectedType =
                                 currentRoute.value?.destination?.let {
@@ -62,7 +63,6 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
                     CenterHost(
                         navController = navController,
-                        closeApp = { this.finishAffinity() },
                         modifier =
                             Modifier
                                 .padding(paddingValues = innerPadding)
