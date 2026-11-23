@@ -10,7 +10,9 @@ import by.arsy.historyphotos.R
 
 val RobotoFamily =
     FontFamily(
-        Font(resId = R.font.roboto_regular),
+        Font(resId = R.font.roboto_regular, weight = FontWeight.Normal),
+        Font(resId = R.font.roboto_medium, weight = FontWeight.Medium),
+        Font(resId = R.font.roboto_semibold, weight = FontWeight.SemiBold),
     )
 
 val Typography =
@@ -28,16 +30,14 @@ val Typography =
                 fontFamily = RobotoFamily,
                 fontWeight = FontWeight.Medium,
                 fontSize = 12.sp,
-                lineHeight = 24.sp,
-                letterSpacing = 0.5.sp,
+                lineHeight = 16.sp,
             ),
         labelLarge =
             TextStyle(
                 fontFamily = RobotoFamily,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 12.sp,
-                lineHeight = 24.sp,
-                letterSpacing = 0.5.sp,
+                lineHeight = 16.sp,
             ),
             /* Other default text styles to override
     titleLarge = TextStyle(
