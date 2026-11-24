@@ -16,10 +16,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import by.arsy.historyphotos.presentation.navigation.BottomNavBar
 import by.arsy.historyphotos.presentation.navigation.NavType
 import by.arsy.historyphotos.presentation.navigation.bottomNavigate
 import by.arsy.historyphotos.presentation.theme.HistoryPhotosTheme
+import by.arsy.historyphotos.presentation.ui.BottomNavBar
 import by.arsy.historyphotos.presentation.ui.CenterHost
 
 class MainActivity : ComponentActivity() {

@@ -1,4 +1,4 @@
-package by.arsy.historyphotos.presentation.navigation
+package by.arsy.historyphotos.presentation.ui
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -26,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import by.arsy.historyphotos.R
+import by.arsy.historyphotos.presentation.navigation.NavType
 import by.arsy.historyphotos.presentation.theme.HistoryPhotosTheme
 
 @Composable
