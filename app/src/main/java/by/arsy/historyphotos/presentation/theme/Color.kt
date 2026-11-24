@@ -1,4 +1,4 @@
-package by.arsy.historyphotos.ui.theme
+package by.arsy.historyphotos.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 

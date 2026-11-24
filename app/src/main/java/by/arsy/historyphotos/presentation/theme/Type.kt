@@ -1,4 +1,4 @@
-package by.arsy.historyphotos.ui.theme
+package by.arsy.historyphotos.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
@@ -11,6 +11,8 @@ import by.arsy.historyphotos.R
 val RobotoFamily =
     FontFamily(
         Font(resId = R.font.roboto_regular, weight = FontWeight.Normal),
+        Font(resId = R.font.roboto_medium, weight = FontWeight.Medium),
+        Font(resId = R.font.roboto_semibold, weight = FontWeight.SemiBold),
     )
 
 val Typography =
@@ -23,7 +25,21 @@ val Typography =
                 lineHeight = 24.sp,
                 letterSpacing = 0.5.sp,
             ),
-    /* Other default text styles to override
+        labelMedium =
+            TextStyle(
+                fontFamily = RobotoFamily,
+                fontWeight = FontWeight.Medium,
+                fontSize = 12.sp,
+                lineHeight = 16.sp,
+            ),
+        labelLarge =
+            TextStyle(
+                fontFamily = RobotoFamily,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 12.sp,
+                lineHeight = 16.sp,
+            ),
+            /* Other default text styles to override
     titleLarge = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
@@ -38,5 +54,5 @@ val Typography =
         lineHeight = 16.sp,
         letterSpacing = 0.5.sp
     )
-     */
+             */
     )

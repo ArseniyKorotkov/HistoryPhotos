@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HistoryPhotos</string>
+    <string name="nav_map">Карта</string>
+    <string name="nav_places">Места</string>
+    <string name="nav_history">История</string>
+</resources>
