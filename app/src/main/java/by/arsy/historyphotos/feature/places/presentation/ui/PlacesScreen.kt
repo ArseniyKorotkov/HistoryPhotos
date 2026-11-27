@@ -35,7 +35,7 @@ fun PlacesScreen(
                     items = uiState.imageList,
                     key = { it.id },
                 ) {
-                    Text(text = it.url)
+                    Text(text = it.title)
                 }
             }
         }
